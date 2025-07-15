@@ -1,0 +1,37 @@
+// Theme variables
+$cover-padding: 150px 0;
+$cover-title-size: 32px;
+$cover-text-size: 20px;
+$cover-text-color: #fff;
+$cover-opacity: 0.7;
+$cover-shadow-color: rgba(0, 0, 0, 0.2);
+$cover-shadow-offset: 1px;
+$cover-shadow-blur: 3px;
+
+@mixin text-shadow($x, $y, $blur, $color) {
+  text-shadow: $x $y $blur $color;
+}
+
+.cover {
+  background-size: cover; /* fills container while preserving ratio :contentReference[oaicite:1]{index=1} */
+  background-position: center;
+  padding: $cover-padding;
+  width: 100vw;
+  height: 100vh;
+
+
+  h1 {
+    margin: 0;
+    color: $cover-text-color;
+    @include text-shadow($cover-shadow-offset, $cover-shadow-offset, $cover-shadow-blur, $cover-shadow-color);
+    font-size: $cover-title-size;
+    font-weight: bold;
+  }
+
+  p {
+    font-size: $cover-text-size;
+    color: $cover-text-color;
+    opacity: $cover-opacity;
+    @include text-shadow($cover-shadow-offset, $cover-shadow-offset, $cover-shadow-blur, $cover-shadow-color);
+  }
+}

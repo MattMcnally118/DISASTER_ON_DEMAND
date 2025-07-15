@@ -1,0 +1,58 @@
+// 🎨 Variables
+$btn-padding: 8px 24px;
+$btn-transition: 0.3s ease;
+$gray: #4A4A4A;
+$flat-bg: #670BFF;
+$flat-bg-hover: #4D04C4;
+$gradient-start: #167FFB;
+$gradient-end: #0F60C4;
+$gradient-hover-start: #147EFF;
+$gradient-hover-end: #0F67DA;
+
+// 🔧 Mixin: common button base
+@mixin btn-base($color, $bg: transparent, $border-color: $color) {
+  color: $color;
+  background: $bg;
+  border: 1px solid $border-color;
+  padding: $btn-padding;
+  border-radius: 4px;
+  transition: all $btn-transition;
+  cursor: pointer;
+}
+
+// 🪄 Specific button types
+
+.btn-ghost {
+  @include btn-base($gray);
+  border-radius: 50px;
+  font-weight: lighter;
+  opacity: 0.6;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.btn-flat {
+  @include btn-base(white, $flat-bg, $flat-bg);
+  border-radius: 4px;
+
+  &:hover {
+    background: $flat-bg-hover;
+    color: white;
+  }
+}
+
+.btn-gradient {
+  @include btn-base(
+    white,
+    linear-gradient($gradient-start, $gradient-end),
+    $gradient-end
+  );
+  font-weight: bold;
+
+  &:hover {
+    background: linear-gradient($gradient-hover-start, $gradient-hover-end);
+    color: white;
+  }
+}
