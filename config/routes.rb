@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   resources :disasters do
+    resources :reviews, only: [:index, :new, :create, :show]
     resources :bookings
   end
 end
