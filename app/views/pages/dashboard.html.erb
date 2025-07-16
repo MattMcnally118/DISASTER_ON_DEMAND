@@ -63,6 +63,17 @@
               <%= f.submit "Update Booking" %>
             <% end %>
           </div>
+          <div class="review-form" data-controller="toggle">
+            <button data-action="click->toggle#fire" class="btn btn-outline-primary">Add a review</button>
+            <div data-toggle-target="togglableElement" class="d-none">
+                <%= simple_form_for @review do |f| %>
+                <%= f.hidden_field :booking_id, value: booking.id %>
+                <%= f.input :comment %>
+                <%= f.input :rating %>
+                <%= f.submit %>
+              <% end %>
+            </div>
+          </div>
         </div>
         <% end %>
     </div>

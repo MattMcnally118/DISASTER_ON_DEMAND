@@ -7,4 +7,5 @@ class User < ApplicationRecord
   enum role: { visitor: 0, owner: 1 }
   has_many :disasters, dependent: :destroy
   has_many :bookings, dependent: :destroy
+  has_many :reviews, through: :bookings, dependent: :destroy
 end

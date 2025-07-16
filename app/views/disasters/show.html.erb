@@ -4,6 +4,14 @@
   <p><strong>Location:</strong> <%= @disaster.location %></p>
   <p><strong>Intensity:</strong> <%= @disaster.intensity %></p>
   <p><strong>Price:</strong> $<%= @disaster.price %></p>
+    <div class="reviews-list">
+      <% @disaster.reviews.each do |review| %>
+    <div class="reviews-list-item" >
+    <p><%= review.comment %></p>
+    <p><%= review.rating %></p>
+    </div>
+      <% end %>
+    </div>
 
   <!-- Booking popup form -->
   <div data-controller="toggle">
