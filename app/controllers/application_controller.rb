@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  # This ensures logging in must happen on all pages before access is granted
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
 
