@@ -1,17 +1,20 @@
 <div class="dashboard">
 <h1>DashBoard</h1>
 
-
+<%# THIS CHECKS FOR THE ROLE OF THE CURRENT USER %>
 <% if current_user.owner?  %>
+<%# OWNERS DASHBOARD %>
 <div class= "owner-dashboard" data-controller="toggle">
   <% @disasters.each do |disaster| %>
     <div class="disaster-card" data-controller="toggle">
+    <%# DISASTER INFO %>
       <%= disaster.name %>
+    <%# EDIT DISASTER BUTTON %>
       <button data-action="click->toggle#fire" class="btn btn-outline-secondary">
         Edit
       </button>
 
-      <!-- Edit form popup for this disaster -->
+      <%# EDIT FORM POP UP FOR THIS DISASTER %>
       <div data-toggle-target="togglableElement" class="d-none">
         <%= simple_form_for disaster do |f| %>
           <%= f.input :disaster_type %>
@@ -26,8 +29,9 @@
     </div>
   <% end %>
 
-
+  <%# BUTTON TO ADD A NEW DISASTER %>
   <button data-action="click->toggle#fire" class="btn btn-outline-primary">Add a new Disaster</button>
+  <%# FORM FOR NEW DISASTER %>
   <div data-toggle-target="togglableElement" class="d-none">
     <%= simple_form_for @disaster do |f| %>
       <%= f.input :disaster_type %>
@@ -42,16 +46,18 @@
 </div>
 
 <% else %>
+<%# VISITORS DASHBOARD %>
     <div class="visitor-dashboard">
+    <%# BOOKINGS INFO %>
       <h2>Your Bookings:</h2>
     <% @bookings.each do |booking| %>
     <div class="booking-card" data-controller="toggle">
       <h4><%= booking.disaster.name %></h4>
       <p><strong>Dates:</strong> <%= booking.start_date %> to <%= booking.end_date %></p>
       <p><strong>Location:</strong> <%= booking.disaster.location %></p>
-      <button data-action="click->toggle#fire" class="btn btn-outline-secondary">
-            Edit Booking
-      </button>
+      <%# BUTTON TO EDIT BOOKING %>
+      <button data-action="click->toggle#fire" class="btn btn-outline-secondary">Edit Booking</button>
+      <%# FORM TO UPDATE BOOKING %>
           <div data-toggle-target="togglableElement" class="d-none">
             <%= simple_form_for booking, html: { method: :patch } do |f| %>
               <%= f.input :start_date,
@@ -64,6 +70,7 @@
             <% end %>
           </div>
           <div class="review-form" data-controller="toggle">
+          <%# BUTTON & FORM TO ADD A REVIEW %>
             <button data-action="click->toggle#fire" class="btn btn-outline-primary">Add a review</button>
             <div data-toggle-target="togglableElement" class="d-none">
                 <%= simple_form_for @review do |f| %>
