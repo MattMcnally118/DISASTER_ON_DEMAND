@@ -14,9 +14,10 @@ class ReviewsController < ApplicationController
   def create
     @review = Review.new(review_params)
     if @review.save
-      redirect_to @review, notice: "Review created."
+      redirect_back fallback_location: root_path, notice: "Review created."
     else
-      render :new
+      Rails.logger.debug "Review errors: #{@review.errors.full_messages}"
+      redirect_back fallback_location: root_path, alert: "Review could not be created. Please try again."
     end
   end
 
@@ -29,7 +30,7 @@ class ReviewsController < ApplicationController
     if @review.update(review_params)
       redirect_to @review, notice: "Updated."
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -42,6 +43,6 @@ class ReviewsController < ApplicationController
   private
 
   def review_params
-    params.require(:review).permit(:user_id, :booking_id, :rating, :comment)
+    params.require(:review).permit(:booking_id, :rating, :comment)
   end
 end
