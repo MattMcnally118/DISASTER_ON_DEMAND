@@ -8,6 +8,7 @@ class PagesController < ApplicationController
     @disasters = current_user.disasters
     @disaster = Disaster.new
     @bookings = current_user.bookings.includes(:disaster)
+    @review = Review.new
   end
 
 end
