@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-
+  # Method to change the users role
   def toggle_role
     if current_user.visitor?
       current_user.owner!
