@@ -96,6 +96,22 @@ puts "Creating disasters..."
 # Create disasters (only assign to owners)
 disaster_owners = created_users.select(&:owner?)
 
+# Add Cloudinary image URLs (you can change these with your own links)
+disaster_images = [
+  "https://antigua.news/wp-content/uploads/2023/04/Hurricane.jpg",
+  "https://www.livemint.com/lm-img/img/2025/03/29/1600x900/AP03-28-2025-000504A-0_1743211425378_1743211434760.jpg",
+  "https://news.northeastern.edu/wp-content/uploads/2025/05/Storms1400.jpg",
+  "https://news.uga.edu/wp-content/uploads/2022/08/Oregon-forest-fire.jpg",
+  "https://gumlet.assettype.com/downtoearth%2F2024-12-26%2F9gv1ljfs%2Ftsunami.jpg?format=auto",
+  "https://ca-times.brightspotcdn.com/dims4/default/d6e85dc/2147483647/strip/true/crop/5285x3356+0+0/resize/2000x1270!/quality/75/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2F1c%2Fd0%2Fa3866a5a41bf982629ed84d51d93%2Fgettyimages-2052025262.jpg",
+  "https://images.newscientist.com/wp-content/uploads/2020/12/21145328/volcanoes-f0r7pt_web.jpg",
+  "https://www.munichre.com/content/dam/munichre/global/images/royalty-free/GettyImages-1497485073.jpg/_jcr_content/renditions/original.image_file.4080.2295.0,389,4080,2684.file/GettyImages-1497485073.jpg",
+  "https://www.onithome.com/wp-content/uploads/2021/06/hail-1.jpg",
+  "https://purple-cdn.web-apps-prod.wo-cloud.com/purple/0f7a645f-e3c1-4a9c-a6dd-ccfa5dff68a7/ccaeda65-166e-49c6-bbcd-ece973f0339c/9253edfa-5c39-44d0-b898-e0d677a95ae2/cab3f771-32f0-4f3f-9e0e-96e575d9aa80.jpg",
+  "https://www.americanoceans.org/wp-content/uploads/2021/03/Hurricane.jpg",
+  "https://s.france24.com/media/display/07565fe4-a781-11ed-ac33-005056a90321/w:1280/p:16x9/58d836d4f263cf3eaa8322a0698dba38b826ffa8.jpg"
+]
+
 disasters_data = [
   {
     disaster_type: "Hurricane",
@@ -207,8 +223,12 @@ disasters_data = [
   }
 ]
 
-created_disasters = disasters_data.map do |disaster_data|
-  Disaster.create!(disaster_data)
+created_disasters = disasters_data.each_with_index.map do |disaster_data, i|
+  disaster = Disaster.create!(disaster_data)
+  image_url = disaster_images[i]
+  file = URI.open(image_url)
+  disaster.photo.attach(io: file, filename: "disaster_#{i + 1}.jpg", content_type: "image/jpeg")
+  disaster
 end
 
 puts "Created #{created_disasters.count} disasters"

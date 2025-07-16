@@ -1,10 +1,17 @@
-
+<div class="index-banner">
+<%= image_tag "volcanic-cloud.jpg", alt: "Disaster on Demand banner", class: "index-banner__image" %>
+  <div class="index-banner__content">
+    <h1>Disasters on Demand</h1>
+    <p>A Catastrophe for Every Occasion</p>
+    <%# ADD SEARCH BAR %>
+  </div>
+</div>
 <div class="cards d-flex flex-wrap justify-content-center gap-4">
   <% @disasters.each do |disaster| %>
     <%= link_to disaster_path(disaster), class: "disaster-card-link" do %>
       <div class="disaster-card">
         <div class="disaster-card__image">
-          <%= cl_image_tag @disaster.photo.key %>
+          <%= cl_image_tag disaster.photo.key %>
         </div>
         <div class="disaster-card__content">
           <h3 class="disaster-card__name"><%= disaster.name %></h3>
