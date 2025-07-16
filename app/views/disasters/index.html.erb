@@ -1,3 +1,18 @@
-<% @disasters.each do |disaster| %>
-<%= disaster.name %>
-<% end %>
+<div class="cards d-flex flex-wrap justify-content-center gap-4">
+  <% @disasters.each do |disaster| %>
+    <%= link_to disaster_path(disaster), class: "disaster-card-link" do %>
+      <div class="disaster-card">
+        <div class="disaster-card__image">
+          <%= image_tag "tornado-emoji.png", alt: "#{disaster.name} image" %>
+        </div>
+        <div class="disaster-card__content">
+          <h3 class="disaster-card__name"><%= disaster.name %></h3>
+          <p class="disaster-card__type"><strong>Type:</strong> <%= disaster.disaster_type %></p>
+          <p class="disaster-card__location"><strong>Location:</strong> <%= disaster.location %></p>
+          <p class="disaster-card__intensity"><strong>Intensity:</strong> <%= disaster.intensity %></p>
+          <p class="disaster-card__price"><strong>Price:</strong> $<%= disaster.price %></p>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
