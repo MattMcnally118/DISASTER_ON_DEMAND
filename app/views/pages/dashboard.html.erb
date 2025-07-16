@@ -18,6 +18,7 @@
       <div data-toggle-target="togglableElement" class="d-none">
         <%= simple_form_for disaster do |f| %>
           <%= f.input :disaster_type %>
+          <%= f.input :photo, as: :file %>
           <%= f.input :name %>
           <%= f.input :location %>
           <%= f.input :intensity %>
