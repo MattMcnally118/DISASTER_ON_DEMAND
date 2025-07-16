@@ -6,7 +6,19 @@ class DisastersController < ApplicationController
   end
 
   def show
+    # initaialize Booking so a booking can be made in the show page
     @booking = Booking.new
+    # This sets markers for the map in the show page
+    if @disaster.geocoded?
+      @markers = [{
+        lat: @disaster.latitude,
+        lng: @disaster.longitude,
+        info_window_html: render_to_string(partial: "info_window", locals: { disaster: @disaster }),
+        marker_html: render_to_string(partial: "marker")
+      }]
+    else
+      @markers = []
+    end
   end
 
   def new
@@ -15,6 +27,7 @@ class DisastersController < ApplicationController
 
   def create
     @disaster = Disaster.new(disaster_params)
+    # This sets the new disasters user to the current user that is logged in
     @disaster.user = current_user
     if @disaster.save
       redirect_to disaster_path(@disaster)

@@ -17,6 +17,7 @@
           <li class="nav-item">
             <%= link_to "Dashboard", dashboard_path, class: "nav-link" %>
           </li>
+          <%# TOGGLE USERS BUTTON %>
           <li class="nav-item">
             <%= button_to "Switch to #{current_user.visitor? ? 'Owner' : 'Visitor'}",
                           toggle_user_role_path,

@@ -16,7 +16,6 @@ class ReviewsController < ApplicationController
     if @review.save
       redirect_back fallback_location: root_path, notice: "Review created."
     else
-      Rails.logger.debug "Review errors: #{@review.errors.full_messages}"
       redirect_back fallback_location: root_path, alert: "Review could not be created. Please try again."
     end
   end
