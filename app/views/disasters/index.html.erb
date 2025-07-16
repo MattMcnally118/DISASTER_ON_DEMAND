@@ -1,3 +1,4 @@
 <% @disasters.each do |disaster| %>
 <%= disaster.name %>
+<%= cl_image_tag @disaster.photo.key %>
 <% end %>

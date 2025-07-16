@@ -55,7 +55,7 @@ class DisastersController < ApplicationController
   private
 
   def disaster_params
-    params.require(:disaster).permit(:name, :disaster_type, :location, :description, :intensity, :price, :user_id)
+    params.require(:disaster).permit(:name, :disaster_type, :location, :description, :intensity, :price, :user_id, :photo)
   end
 
   def set_disaster
