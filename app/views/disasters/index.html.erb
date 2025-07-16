@@ -1,9 +1,10 @@
+
 <div class="cards d-flex flex-wrap justify-content-center gap-4">
   <% @disasters.each do |disaster| %>
     <%= link_to disaster_path(disaster), class: "disaster-card-link" do %>
       <div class="disaster-card">
         <div class="disaster-card__image">
-          <%= image_tag "tornado-emoji.png", alt: "#{disaster.name} image" %>
+          <%= cl_image_tag @disaster.photo.key %>
         </div>
         <div class="disaster-card__content">
           <h3 class="disaster-card__name"><%= disaster.name %></h3>
