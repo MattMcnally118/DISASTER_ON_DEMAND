@@ -46,7 +46,7 @@ class DisastersController < ApplicationController
     # This sets the new disasters user to the current user that is logged in
     @disaster.user = current_user
     if @disaster.save
-      redirect_to disaster_path(@disaster)
+      redirect_to dashboard_path
     else
       render :new, status: :unprocessable_entity
     end
@@ -57,7 +57,7 @@ class DisastersController < ApplicationController
 
   def update
     if @disaster.update(disaster_params)
-      redirect_to disaster_path(@disaster)
+      redirect_to dashboard_path
     else
       render :edit, status: :unprocessable_entity
     end

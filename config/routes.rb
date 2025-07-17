@@ -14,10 +14,10 @@ Rails.application.routes.draw do
 
   # Main Routes Bookings mostly nested in Disasters.
   resources :disasters do
-    resources :bookings, except: [:update]
+    resources :bookings, except: [:update, :destroy]
   end
   # Bookings update not nested so it can be called in Dashboard.
-  resources :bookings, only: [:update]
+  resources :bookings, only: [:update, :destroy]
   # Reviews not nested, Can only make a review can't delete or edit.
   resources :reviews, only: [:new, :create]
 end
