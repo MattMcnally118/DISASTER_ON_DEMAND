@@ -2,7 +2,11 @@
   justify-content: space-between;
   background: rgba(0, 0, 0, 0.5);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  color: whitesmoke;
+
+      a, button{
+       color: whitesmoke;
+      }
+
 }
 
 .navbar-lewagon .navbar-collapse {
