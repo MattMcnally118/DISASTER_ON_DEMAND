@@ -3,7 +3,16 @@
   <div class="index-banner__content">
     <h1>Disasters on Demand</h1>
     <p>A Catastrophe for Every Occasion</p>
-    <%# ADD SEARCH BAR %>
+    <div class="search-bar">
+      <%= form_with url: disasters_path, method: :get, class: "d-flex" do %>
+        <%= text_field_tag :query,
+              params[:query],
+              class: "form-control",
+              placeholder: "Type a keyword"
+          %>
+        <%= submit_tag "Search", name: "", class: "btn btn-primary" %>
+      <% end %>
+    </div>
   </div>
 </div>
 <div class="cards d-flex flex-wrap justify-content-center gap-4">

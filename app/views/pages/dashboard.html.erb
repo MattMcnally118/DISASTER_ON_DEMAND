@@ -1,18 +1,28 @@
 <div class="dashboard">
-<h1>DashBoard</h1>
-
 <%# THIS CHECKS FOR THE ROLE OF THE CURRENT USER %>
 <% if current_user.owner?  %>
 <%# OWNERS DASHBOARD %>
 <div class= "owner-dashboard" data-controller="toggle">
+  <h1><%= current_user.name %>'s Disasters</h1>
   <% @disasters.each do |disaster| %>
     <div class="disaster-card" data-controller="toggle">
-    <%# DISASTER INFO %>
-      <%= disaster.name %>
+      <div class="disaster-card__image">
+            <%= cl_image_tag disaster.photo.key %>
+          </div>
+          <div class="disaster-card__content">
+            <h3 class="disaster-card__name"><%= disaster.name %></h3>
+            <p class="disaster-card__type"><strong>Type:</strong> <%= disaster.disaster_type %></p>
+            <p class="disaster-card__location"><strong>Location:</strong> <%= disaster.location %></p>
+            <p class="disaster-card__intensity"><strong>Intensity:</strong> <%= disaster.intensity %></p>
+            <p class="disaster-card__price"><strong>Price:</strong> $<%= disaster.price %></p>
+          </div>
     <%# EDIT DISASTER BUTTON %>
+    <div class="disaster-card-buttons">
       <button data-action="click->toggle#fire" class="btn btn-outline-secondary">
         Edit
       </button>
+      <%= link_to "Delete", disaster_path(disaster), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: "btn btn-outline-secondary" %>
+    </div>
 
       <%# EDIT FORM POP UP FOR THIS DISASTER %>
       <div data-toggle-target="togglableElement" class="d-none">
