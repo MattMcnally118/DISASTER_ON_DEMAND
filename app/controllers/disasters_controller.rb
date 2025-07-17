@@ -3,7 +3,23 @@ class DisastersController < ApplicationController
 
   def index
     @disasters = Disaster.all
+    if params[:query].present?
+      if params[:query] =~ /\A\d+(\.\d+)?\z/
+        num_query = params[:query].to_f
+        @disasters = Disaster.where("price <= :num OR intensity >= :num", num: num_query)
+      else
+        sql_subquery = <<~SQL
+          disasters.disaster_type @@ :query
+          OR disasters.description @@ :query
+          OR disasters.name @@ :query
+          OR disasters.location @@ :query
+        SQL
+
+        @disasters = Disaster.where(sql_subquery, query: params[:query])
+      end
+    end
   end
+
 
   def show
     # initaialize Booking so a booking can be made in the show page
@@ -49,7 +65,7 @@ class DisastersController < ApplicationController
 
   def destroy
     @disaster.destroy
-    redirect_to disasters_path, status: :see_other
+    redirect_to dashboard_path, status: :see_other
   end
 
   private
