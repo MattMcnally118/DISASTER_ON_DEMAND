@@ -9,6 +9,7 @@
 #   end
 # Clear existing data
 puts "Clearing existing data..."
+Review.destroy_all
 Booking.destroy_all
 Disaster.destroy_all
 User.destroy_all
