@@ -13,3 +13,9 @@
 @import "pages/index";
 @import "components/cover";
 @import "components/button";
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
