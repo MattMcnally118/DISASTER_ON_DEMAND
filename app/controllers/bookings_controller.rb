@@ -16,14 +16,10 @@ class BookingsController < ApplicationController
   end
 
   def create
-    @booking = Booking.new(booking_params)
-    # This sets the Disaster ID of the booking
-    @booking.disaster_id = @disaster.id
-    if @booking.save
-      redirect_to disaster_bookings_path(@disaster)
-    else
-      render :new, status: :unprocessable_entity
-    end
+    @booking = @disaster.bookings.new(booking_params)
+    @booking.user = current_user
+    @booking.save
+    redirect_to dashboard_path
   end
 
   def edit
