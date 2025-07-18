@@ -1,7 +1,7 @@
 class BookingsController < ApplicationController
   before_action :set_booking, only: %w[show edit update destroy]
   # This calls the private method set_disaster
-  before_action :set_disaster
+  before_action :set_disaster, except: [:destroy]
 
   def index
     # This sets the bookings to being the Bookings make for a specific disaster (used on the Disasters show page)
@@ -39,7 +39,7 @@ class BookingsController < ApplicationController
 
   def destroy
     @booking.destroy
-    redirect_to disaster_bookings_path(@disaster), status: :see_other
+    redirect_to dashboard_path, notice: "Booking deleted", status: :see_other
   end
 
   private

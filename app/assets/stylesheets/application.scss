@@ -13,17 +13,9 @@
 @import "pages/index";
 @import "components/cover";
 @import "components/button";
-@import "components/session-new";
 
 html, body {
   height: 100%;
   margin: 0;
 }
-body {
-  display: flex;
-  flex-direction: column;
-}
-.cover {
-  flex: 1;
-  overflow: auto;
-}
+
