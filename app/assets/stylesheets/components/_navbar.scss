@@ -1,20 +1,8 @@
 .navbar-lewagon {
   position: relative;
   justify-content: space-between;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  color: whitesmoke;
-  z-index: 1000;
-}
-
-.navbar-lewagon::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-color: rgba(255, 255, 255, 0.3);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  border-radius: 0.5rem;
-  z-index: -1;
+  background: linear-gradient(180deg, #e0e0e0, #a0a0a0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   background: transparent;
 }
 

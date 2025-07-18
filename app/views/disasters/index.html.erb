@@ -2,34 +2,36 @@
 <%= image_tag "volcanic-cloud.jpg", alt: "Disaster on Demand banner", class: "index-banner__image" %>
   <div class="index-banner__content">
     <h1>Disasters on Demand</h1>
-    <p>A Catastrophe for Every Occasion</p>
+    <p>Apocalypse, just one click away</p>
     <div class="search-bar">
       <%= form_with url: disasters_path, method: :get, class: "d-flex" do %>
         <%= text_field_tag :query,
               params[:query],
               class: "form-control",
-              placeholder: "Type a keyword"
+              placeholder: "Help us find your Disaster..."
           %>
-        <%= submit_tag "Search", name: "", class: "btn btn-flat" %>
+        <%= submit_tag "Search", name: "", class: "btn-search" %>
       <% end %>
     </div>
   </div>
 </div>
-<div class="cards d-flex flex-wrap justify-content-center gap-4">
-  <% @disasters.each do |disaster| %>
-    <%= link_to disaster_path(disaster), class: "disaster-card-link" do %>
-      <div class="disaster-card">
-        <div class="disaster-card__image">
-          <%= cl_image_tag disaster.photo.key %>
+<div class="disaster-cards-container">
+  <div class="horizontal-scroll">
+    <% @disasters.each do |disaster| %>
+      <%= link_to disaster_path(disaster), class: "disaster-card-link" do %>
+        <div class="disaster-card">
+          <div class="disaster-card__image">
+            <%= cl_image_tag disaster.photo.key %>
+          </div>
+          <div class="disaster-card__content">
+            <h3 class="disaster-card__name"><%= disaster.name %></h3>
+            <p class="disaster-card__type"><strong>Type:</strong> <%= disaster.disaster_type %></p>
+            <p class="disaster-card__location"><strong>Location:</strong> <%= disaster.location %></p>
+            <p class="disaster-card__intensity"><strong>Intensity:</strong> <%= disaster.intensity %></p>
+            <p class="disaster-card__price"><strong>Price:</strong> $<%= disaster.price %></p>
+          </div>
         </div>
-        <div class="disaster-card__content">
-          <h3 class="disaster-card__name"><%= disaster.name %></h3>
-          <p class="disaster-card__type"><strong>Type:</strong> <%= disaster.disaster_type %></p>
-          <p class="disaster-card__location"><strong>Location:</strong> <%= disaster.location %></p>
-          <p class="disaster-card__intensity"><strong>Intensity:</strong> <%= disaster.intensity %></p>
-          <p class="disaster-card__price"><strong>Price:</strong> $<%= disaster.price %></p>
-        </div>
-      </div>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 </div>

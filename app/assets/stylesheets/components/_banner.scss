@@ -15,16 +15,44 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: white;
     text-align: center;
 
     h1 {
+      font-family:'Metal Mania', cursive;
+      color: #f5f5dc;
       font-size: 3rem;
       margin-bottom: 0.5rem;
     }
 
     p {
+      font-family: 'Changa One', cursive;
       font-size: 1.5rem;
+      color: #e8e6e3;
     }
   }
+}
+
+.btn-search{
+  font-family: 'Metal Mania', cursive;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #f5f5dc;
+  background: transparent;
+  border: 2px solid #f5f5dc;
+  border-radius: 10px;
+  padding: 10px 20px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  backdrop-filter: blur(5px);
+  z-index: 2;
+}
+.btn-search:hover{
+  background: linear-gradient(135deg, #6e6e58, #4d4d3a);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 25px rgba(180, 180, 140, 0.4);
 }

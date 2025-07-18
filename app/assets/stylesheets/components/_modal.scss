@@ -16,7 +16,7 @@
 }
 
 .modal-content {
-  background: white;
+  background: radial-gradient(circle, #c0c0c0 0%, #707070 100%);
   border-radius: 12px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
   max-width: 500px;
@@ -55,6 +55,7 @@
   margin-bottom: 8px;
   font-size: 14px;
   text-transform: capitalize;
+  font-family: 'Changa One', cursive;
 }
 
 .modal-content input[type="text"],
@@ -118,13 +119,14 @@
 
 /* Submit Button */
 .modal-content input[type="submit"] {
-  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-  color: white;
+  background: linear-gradient(135deg, #f5f5dc, #d4d4aa);
+  color: #2c2c2c;
+  font-family: 'Metal Mania', cursive;
   border: none;
   padding: 14px 32px;
   border-radius: 8px;
   font-weight: 600;
-  font-size: 16px;
+  font-size: 1.2rem;
   cursor: pointer;
   transition: all 0.2s ease;
   width: 100%;
@@ -132,9 +134,9 @@
 }
 
 .modal-content input[type="submit"]:hover {
-  background: linear-gradient(135deg, #1d4ed8, #1e40af);
+  background: linear-gradient(135deg, #d4d4aa, #bfbf9e);
   transform: translateY(-1px);
-  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 8px 25px rgba(180, 180, 140, 0.4);
 }
 
 .modal-content input[type="submit"]:active {
@@ -161,29 +163,6 @@
   font-style: italic;
 }
 
-/* Close Button (if you want to add one) */
-.modal-close {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  background: none;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-  color: #6b7280;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
-}
-
-.modal-close:hover {
-  background: #f3f4f6;
-  color: #374151;
-}
 
 /* Responsive Design */
 @media (max-width: 768px) {
