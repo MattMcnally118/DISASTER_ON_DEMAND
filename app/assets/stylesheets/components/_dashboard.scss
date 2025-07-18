@@ -1,11 +1,17 @@
 .visitor-dashboard,
 .owner-dashboard{
-  display: flex;
-  flex-direction: column;
   align-items: center;
   text-align: center;
   padding: 2rem;
   gap: 2rem;
+  background: linear-gradient(180deg, #c0c0c0, #707070);
+
+  h1{
+    font-family:'Metal Mania', cursive;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #6aa0d8;
+  }
 }
 
 .disaster-card-buttons {
@@ -13,6 +19,29 @@
   gap: 1rem;
   justify-content: center;
   margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+
+.dashboard-card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem;
+}
+.dashboard-card-wrapper{
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  width: 300px;
+}
+
+.booking-card-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem;
 }
 
 .booking-card {
@@ -43,6 +72,7 @@
   }
 
   h4 {
+    font-family:'Metal Mania', cursive;
     font-size: 1.5rem;
     color: #5dade2;
     margin: 0.5rem 0;

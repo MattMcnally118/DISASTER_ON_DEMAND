@@ -4,44 +4,48 @@
 <%# OWNERS DASHBOARD %>
 <div class= "owner-dashboard" data-controller="toggle">
   <h1><%= current_user.name %>'s Disasters</h1>
-  <% @disasters.each do |disaster| %>
-    <div class="disaster-card" data-controller="toggle">
-      <div class="disaster-card__image">
-            <%= cl_image_tag disaster.photo.key, alt: disaster.name %>
-          </div>
-          <div class="disaster-card__content">
-            <h3 class="disaster-card__name"><%= disaster.name %></h3>
-            <p class="disaster-card__type"><strong>Type:</strong> <%= disaster.disaster_type %></p>
-            <p class="disaster-card__location"><strong>Location:</strong> <%= disaster.location %></p>
-            <p class="disaster-card__intensity"><strong>Intensity:</strong> <%= disaster.intensity %></p>
-            <p class="disaster-card__price"><strong>Price:</strong> $<%= disaster.price %></p>
-          </div>
-    <%# EDIT DISASTER BUTTON %>
-    <div class="disaster-card-buttons">
-      <button data-action="click->toggle#fire" class="btn btn-outline-secondary">
-        Edit
-      </button>
-      <%= link_to "Delete", disaster_path(disaster), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: "btn btn-outline-secondary" %>
-    </div>
+  <div class="dashboard-card-container">
+      <% @disasters.each do |disaster| %>
+      <div class="disaster-card" data-controller="toggle">
+        <div class="disaster-card__image">
+              <%= cl_image_tag disaster.photo.key, alt: disaster.name %>
+            </div>
+            <div class="disaster-card__content">
+              <h3 class="disaster-card__name"><%= disaster.name %></h3>
+              <p class="disaster-card__type"><strong>Type:</strong> <%= disaster.disaster_type %></p>
+              <p class="disaster-card__location"><strong>Location:</strong> <%= disaster.location %></p>
+              <p class="disaster-card__intensity"><strong>Intensity:</strong> <%= disaster.intensity %></p>
+              <p class="disaster-card__price"><strong>Price:</strong> $<%= disaster.price %></p>
+            </div>
+            <%# EDIT DISASTER BUTTON %>
+            <div class="disaster-card-buttons">
+              <button data-action="click->toggle#fire" class="btn-search">
+                Edit
+              </button>
+              <%= link_to "Delete", disaster_path(disaster), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: "btn-search" %>
+            </div>
 
-      <%# EDIT FORM POP UP FOR THIS DISASTER %>
-      <div data-toggle-target="togglableElement" class="d-none">
-        <%= simple_form_for disaster do |f| %>
-          <%= f.input :disaster_type %>
-          <%= f.input :photo, as: :file %>
-          <%= f.input :name %>
-          <%= f.input :location %>
-          <%= f.input :intensity %>
-          <%= f.input :price %>
-          <%= f.input :description %>
-          <%= f.submit "Update Disaster" %>
-        <% end %>
-      </div>
-    </div>
-  <% end %>
+            <%# EDIT FORM POP UP FOR THIS DISASTER %>
+            <div data-toggle-target="togglableElement" class="d-none">
+              <%= simple_form_for disaster do |f| %>
+                <%= f.input :disaster_type %>
+                <%= f.input :photo, as: :file %>
+                <%= f.input :name %>
+                <%= f.input :location %>
+                <%= f.input :intensity %>
+                <%= f.input :price %>
+                <%= f.input :description %>
+                <%= f.submit "Update Disaster" %>
+              <% end %>
+            </div>
+            </div>
+              <% end %>
+        </div>
+  </div>
+
 
   <%# BUTTON TO ADD A NEW DISASTER %>
-  <button data-action="click->toggle#fire" class="btn btn-outline-primary">Add a new Disaster</button>
+  <button data-action="click->toggle#fire" class="btn-search">Add a new Disaster</button>
   <%# FORM FOR NEW DISASTER %>
   <div data-toggle-target="togglableElement" class="d-none">
     <div class="modal-overlay">
@@ -58,14 +62,15 @@
         <% end %>
       </div>
     </div>
-  </div>
+
 </div>
 
 <% else %>
 <%# VISITORS DASHBOARD %>
     <div class="visitor-dashboard">
     <%# BOOKINGS INFO %>
-      <h2><%= current_user.name %>'s Bookings:</h2>
+      <h1><%= current_user.name %>'s Bookings:</h1>
+      <div class="booking-card-container">
     <% @bookings.each do |booking| %>
     <div class="booking-card" data-controller="toggle">
       <div class="booking-card-img">
@@ -74,26 +79,29 @@
       <h4><%= booking.disaster.name %></h4>
       <p><strong>Dates:</strong> <%= booking.start_date %> to <%= booking.end_date %></p>
       <p><strong>Location:</strong> <%= booking.disaster.location %></p>
+      <p><strong>Price:</strong> $<%= booking.total_price %></p>
       <%# BUTTON TO EDIT BOOKING %>
       <div class="booking-card-buttons">
-      <button data-action="click->toggle#fire" class="btn btn-outline-secondary">Edit Booking</button>
-      <%= link_to "Delete", booking_path(booking), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: "btn btn-outline-secondary" %>
+      <button data-action="click->toggle#fire" class="btn-search">Edit Booking</button>
+      <%= link_to "Delete", booking_path(booking), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: "btn-search" %>
       </div>
       <%# FORM TO UPDATE BOOKING %>
-          <div data-toggle-target="togglableElement" class="d-none">
-            <%= simple_form_for booking, html: { method: :patch } do |f| %>
-              <%= f.input :start_date,
-                        as: :string,
-                        input_html: { data: { controller: "datepicker" } } %>
-              <%= f.input :end_date,
-                        as: :string,
-                        input_html: { data: { controller: "datepicker" } } %>
-              <%= f.submit "Update Booking" %>
-            <% end %>
-          </div>
+        <div data-toggle-target="togglableElement" class="d-none" data-controller="edit-price-calculator" data-edit-price-calculator-disaster-price-value="<%= booking.disaster.price %>">
+          <%= simple_form_for booking, html: { method: :patch } do |f| %>
+            <%= f.input :start_date,
+              as: :string,
+              input_html: { data: { edit_price_calculator_target: "startDate", action: "input->edit-price-calculator#updatePrice", controller: "datepicker" } } %>
+            <%= f.input :end_date,
+              as: :string,
+              input_html: { data: { edit_price_calculator_target: "endDate", action: "input->edit-price-calculator#updatePrice", controller: "datepicker" } } %>
+            <p><strong>Total Price:</strong> <span data-edit-price-calculator-target="price"></span></p>
+          <%= f.submit "Update Booking" %>
+        <% end %>
+      </div>
+
           <div class="review-form" data-controller="toggle">
           <%# BUTTON & FORM TO ADD A REVIEW %>
-            <button data-action="click->toggle#fire" class="btn btn-outline-primary">Add a review</button>
+            <button data-action="click->toggle#fire" class="btn-search">Add a review</button>
             <div data-toggle-target="togglableElement" class="d-none">
                 <%= simple_form_for @review do |f| %>
                 <%= f.hidden_field :booking_id, value: booking.id %>
@@ -105,6 +113,11 @@
           </div>
         </div>
         <% end %>
+      </div>
     </div>
   <% end %>
 </div>
+<script>
+const price = document.querySelector("#edit")
+price.textContent =
+</script>

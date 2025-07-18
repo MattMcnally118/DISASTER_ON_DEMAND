@@ -34,21 +34,24 @@
           Book This Disaster
         </button>
 
-        <div data-toggle-target="togglableElement" class="d-none">
-          <div class="modal-overlay">
-            <div class="modal-content">
-              <h3>Book <%= @disaster.name %></h3>
-              <%= simple_form_for [@disaster, @booking] do |f| %>
-                <%= f.input :start_date, as: :string, input_html: { data: { controller: "datepicker" } } %>
-                <%= f.input :end_date, as: :string, input_html: { data: { controller: "datepicker" } } %>
-                <%= f.submit "Book Now"%>
-                <button type="button" data-action="click->toggle#fire" class="btn-search" style="width: 100%; margin-top: 1rem;">
-                  Cancel
-                </button>
-              <% end %>
-            </div>
+      <div data-toggle-target="togglableElement" class="d-none">
+        <div class="modal-overlay">
+          <div class="modal-content" data-controller="price-calculator" data-price-calculator-disaster-price-value="<%= @disaster.price %>">
+            <h3>Book <%= @disaster.name %></h3>
+            <%= simple_form_for [@disaster, @disaster.bookings.new] do |f| %>
+              <%= f.input :start_date, as: :string, input_html: { data: { price_calculator_target: "startDate", action: "input->price-calculator#updatePrice", controller: "datepicker" } } %>
+              <%= f.input :end_date, as: :string, input_html: { data: { price_calculator_target: "endDate", action: "input->price-calculator#updatePrice", controller: "datepicker" } } %>
+
+              <p><strong>Total Price:</strong> <span data-price-calculator-target="price">$0.00</span></p>
+
+              <%= f.submit "Book Now", class: "btn btn-success" %>
+              <button type="button" data-action="click->toggle#fire" class="btn-search" style="width: 100%; margin-top: 1rem;">
+                Cancel
+              </button>
+            <% end %>
           </div>
         </div>
+      </div>
       </div>
     </div>
   </div>
