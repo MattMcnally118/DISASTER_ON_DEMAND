@@ -7,7 +7,7 @@
   <% @disasters.each do |disaster| %>
     <div class="disaster-card" data-controller="toggle">
       <div class="disaster-card__image">
-            <%= cl_image_tag disaster.photo.key %>
+            <%= cl_image_tag disaster.photo.key alt: disaster.name %>
           </div>
           <div class="disaster-card__content">
             <h3 class="disaster-card__name"><%= disaster.name %></h3>
