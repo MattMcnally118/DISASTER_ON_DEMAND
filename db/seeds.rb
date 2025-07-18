@@ -22,7 +22,7 @@ user_images = [
   "https://res.cloudinary.com/dxw0o8aaj/image/upload/c_crop/v1683954154/explorer_profiles/mike_chen.png",
   "https://pbs.twimg.com/profile_images/1589417994580643840/AnOOpDRX_400x400.jpg",
   "https://s3media.247sports.com/Uploads/Assets/577/27/3027577.jpg",
-  "https://i1.rgstatic.net/ii/profile.image/11431281106665467-1670833738718_Q512/Lisa-Martinez-10.jpg",
+  "https://s3media.247sports.com/Uploads/Assets/577/27/3027577.jpg",
   "https://i.redd.it/t202er8ae6f51.jpg",
   "https://pbs.twimg.com/profile_images/1317795886701969408/i9inMUiu_400x400.jpg"
 ]
