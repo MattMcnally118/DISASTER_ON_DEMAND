@@ -22,12 +22,12 @@
             <%= button_to "Switch to #{current_user.visitor? ? 'Owner' : 'Visitor'}",
                           toggle_user_role_path,
                           method: :patch,
-                          class: "nav-link btn btn-link",
+                          class: "nav-link btn-toggle",
                           form: { class: "d-inline" } %>
           </li>
           <li class="nav-item dropdown">
   <a href="#" class="nav-link d-flex align-items-center p-0" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier",
+    <%= cl_image_tag current_user.photo.key,
                   class: "rounded-circle border border-2 border-white shadow",
                   width: 40, height: 40, alt: "User avatar" %>
   </a>

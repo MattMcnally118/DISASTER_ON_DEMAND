@@ -1,8 +1,8 @@
 .navbar-lewagon {
 background: linear-gradient(180deg, #c0c0c0, #707070);
   background-color: rgba(255, 255, 255, 0.3);
-  -webkit-backdrop-filter: blur(10px); /* Safari */
-  backdrop-filter: blur(10px);         /* Chrome, Edge, Opera, modern Firefox */
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.18);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   z-index: 1;
@@ -19,4 +19,16 @@ background: linear-gradient(180deg, #c0c0c0, #707070);
 
 .navbar-lewagon .navbar-brand img {
   width: 50px;
+}
+
+.btn-toggle {
+    display: inline-block;
+    position: relative;
+    background:#fafafa;
+    border-radius: 25px;
+    margin-right: 5px;
+    padding: 3px;
+    width: 180px;
+    height: 44px;
+    cursor: pointer;
 }

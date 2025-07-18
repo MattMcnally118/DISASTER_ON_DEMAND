@@ -16,6 +16,17 @@ User.destroy_all
 
 puts "Creating users..."
 
+user_images = [
+  "https://www.americanacademy.de/wp-content/uploads/2019/02/Smith-John-E..jpg",
+  "https://pbs.twimg.com/profile_images/1271544502340198400/8Fq7zjbq_400x400.jpg",
+  "https://res.cloudinary.com/dxw0o8aaj/image/upload/c_crop/v1683954154/explorer_profiles/mike_chen.png",
+  "https://pbs.twimg.com/profile_images/1589417994580643840/AnOOpDRX_400x400.jpg",
+  "https://s3media.247sports.com/Uploads/Assets/577/27/3027577.jpg",
+  "https://s3media.247sports.com/Uploads/Assets/577/27/3027577.jpg",
+  "https://i.redd.it/t202er8ae6f51.jpg",
+  "https://pbs.twimg.com/profile_images/1317795886701969408/i9inMUiu_400x400.jpg"
+]
+
 # Create users with varying roles
 users = [
   {
@@ -84,8 +95,12 @@ users = [
   }
 ]
 
-created_users = users.map do |user_data|
-  User.create!(user_data)
+created_users = users.each_with_index.map do |user_data, i|
+  user = User.create!(user_data)
+  image_url = user_images[i]
+  file = URI.open(image_url)
+  user.photo.attach(io: file, filename: "user_#{i + 1}.jpg", content_type: "image/jpeg")
+  user
 end
 
 puts "Created #{created_users.count} users"
